@@ -30,7 +30,7 @@ const estudianteSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        maxlength: [20, 'El apellido no puede superar 20 caracteres']
+        maxlength: [50, 'La ciudad no puede superar 20 caracteres']
     },
     direccion: {
         type: String,
@@ -50,7 +50,7 @@ const estudianteSchema = new Schema({
         required: true,
         trim: true,
         unique: true,
-        maxlength: [50, 'La direccion no puede superar 50 caracteres']
+        maxlength: [50, 'El email no puede superar 50 caracteres']
     }
     }, {
     timestamps: true 
