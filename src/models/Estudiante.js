@@ -49,7 +49,8 @@ const estudianteSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true
+        unique: true,
+        maxlength: [50, 'La direccion no puede superar 50 caracteres']
     }
     }, {
     timestamps: true 
