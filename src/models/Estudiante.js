@@ -5,18 +5,22 @@ const estudianteSchema = new Schema({
     nombre: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        maxlength: [20, 'El nombre no puede superar 20 caracteres']
     },
     apellido: {
         type: String,
         required: false,
-        trim: true
+        trim: true,
+        maxlength: [20, 'El apellido no puede superar 20 caracteres']
     },
     cedula: {
         type: String,
         required: true,
         trim: true,
-        unique: true
+        unique: true,
+        minlength: [10, 'La cedula debe tener al menos 10 caracteres'],
+        maxlength: [10, 'La cedula no puede superar 10 caracteres']
     },
     fecha_nacimiento: {
         type: Date,
@@ -25,17 +29,21 @@ const estudianteSchema = new Schema({
     ciudad: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        maxlength: [20, 'El apellido no puede superar 20 caracteres']
     },
     direccion: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        maxlength: [50, 'La direccion no puede superar 50 caracteres']
     },
     telefono: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        minlength: [10, 'El telefono debe tener al menos 10 caracteres'],
+        maxlength: [10, 'El telefono no puede superar 10 caracteres']
     },
     email: {
         type: String,

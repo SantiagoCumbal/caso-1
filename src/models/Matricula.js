@@ -4,12 +4,14 @@ const matriculaSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true
+        unique: true,
+        maxlength: [20, 'El codigo no puede superar 20 caracteres']
     },
     descripcion: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        maxlength: [50, 'La descripcion no puede superar 50 caracteres']
     },
     id_estudiante: {
         type: mongoose.Schema.Types.ObjectId,
