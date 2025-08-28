@@ -13,12 +13,12 @@ const matriculaSchema = new Schema({
         trim: true,
         maxlength: [50, 'La descripcion no puede superar 50 caracteres']
     },
-    id_estudiante: {
+    estudiante: {
         type: mongoose.Schema.Types.ObjectId,
         ref:'Estudiante',
         required: true
     },
-    id_materia: {
+    materia: {
         type: mongoose.Schema.Types.ObjectId,
         ref:'Materia',
         required: true
