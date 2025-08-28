@@ -5,7 +5,7 @@ import Materia from "../models/Materia.js"
 
 const registroMatricula = async (req,res)=>{
     try {
-            const { codigo, descripcion, estudiante, materia } = req.body
+            const { codigo, descripcion, id_estudiante, id_materia } = req.body
         if (Object.values(req.body).includes("")) return res.status(400).json(
             {msg:"Lo sentimos, debes llenar todos los campos"}
         )
@@ -15,20 +15,20 @@ const registroMatricula = async (req,res)=>{
             { msg: `El código ${codigo} ya está en uso para otra matricula` }
         )
 
-        const estudianteExiste = await Estudiante.findById(estudiante);
+        const estudianteExiste = await Estudiante.findById(id_estudiante);
         if (!estudianteExiste) return res.status(400).json(
             { msg: "El estudiante no existe" }
         )
         
-        const materiaExistente = await Materia.findById(materia);
+        const materiaExistente = await Materia.findById(id_materia);
         if (!materiaExistente) return res.status(400).json(
             { msg: "La materia no existe" }
         )
         
         const nuevaMatricula = new Matricula({
             ...req.body,
-            estudiante: estudiante,
-            materia: materia
+            id_estudiante: id_estudiante,
+            id_materia: id_materia
         })
         await nuevaMatricula.save()
         res.status(200).json({nuevaMatricula})
@@ -64,7 +64,7 @@ const detalleMatricula = async(req,res)=>{
 const actualizarMatricula = async (req,res)=>{
     try {
             const {id} = req.params
-        const {codigo, descripcion, estudiante, materia} = req.body
+        const {codigo, descripcion, id_estudiante, id_materia} = req.body
         if( !mongoose.Types.ObjectId.isValid(id) ) return res.status(404).json(
             {msg:`Lo sentimos, debe ser un id válido`}
         )
@@ -79,12 +79,12 @@ const actualizarMatricula = async (req,res)=>{
         if (codigoExistente) return res.status(400).json(
             { msg: `El código ${codigo} ya está en uso por otra matricula` }
         )
-        const estudianteExiste = await Estudiante.findById(estudiante);
+        const estudianteExiste = await Estudiante.findById(id_estudiante);
         if (!estudianteExiste) return res.status(400).json(
             { msg: "El estudiante no existe" }
         )
         
-        const materiaExistente = await Materia.findById(materia);
+        const materiaExistente = await Materia.findById(id_materia);
         if (!materiaExistente) return res.status(400).json(
             { msg: "La materia no existe" }
         )
@@ -92,8 +92,8 @@ const actualizarMatricula = async (req,res)=>{
 
         matriculaBDD.codigo = codigo ?? matriculaBDD.codigo
         matriculaBDD.descripcion = descripcion ?? matriculaBDD.descripcion
-        matriculaBDD.estudiante = estudiante ?? matriculaBDD.estudiante
-        matriculaBDD.materia = materia ?? matriculaBDD.materia
+        matriculaBDD.id_estudiante = id_estudiante ?? matriculaBDD.id_estudiante
+        matriculaBDD.id_materia = id_materia ?? matriculaBDD.id_materia
         await matriculaBDD.save()
 
         res.status(200).json(matriculaBDD)
